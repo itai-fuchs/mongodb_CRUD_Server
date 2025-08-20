@@ -5,7 +5,7 @@ metadata:
   namespace: itaifuchs-dev
 spec:
   selector:
-    app: datacd -loader-api
+    app: data-loader-api
   ports:
     - name: http
       port: 8000
