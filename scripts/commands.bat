@@ -58,3 +58,18 @@ oc rollout restart deploy/data-loader-api -n itaifuchs-dev
 
 
 oc rollout restart deploy/data-loader-api -n itaifuchs-dev
+
+
+
+# update documents
+# Change the "<route>" to the real path and inter id in "<id>"
+curl -X PUT "https://<route>/update-soldier/<id>" \
+  -H "Content-Type: application/json" \
+  -d '{ "firstName": "John", "rank": 3 }'
+
+
+
+ # delete documents
+ # Change the "<route>" to the real path and inter id in "<id>"
+curl -X DELETE "https://<route>/delete-soldier/<id>"
+
