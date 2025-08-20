@@ -1,4 +1,4 @@
-from soldier import Soldier
+from Solider import Solider
 from typing import List, Dict, Any
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import Config
@@ -29,7 +29,7 @@ class MongoDal:
     
     async def create_soldier(self,id:int, first_name: str, last_name: str, phone_number: int, rank: int) -> Dict[str, Any]:
         col = self.get_collection()
-        self.soldier = Soldier(id, first_name, last_name, phone_number, rank).convert_to_json()
+        self.soldier = Solider(id, first_name, last_name, phone_number, rank).convert_to_json()
         await col.insert_one(self.soldier)
         return self.soldier
     
