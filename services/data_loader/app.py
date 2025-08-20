@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Path
+from fastapi import FastAPI, HTTPException, Path, Body
 from fastapi.responses import JSONResponse
 from typing import List, AsyncIterator
 from contextlib import asynccontextmanager
@@ -37,17 +37,17 @@ async def create_soldier(id: int, first_name: str, last_name: str, phone_number:
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.put("/update soldier/{soldier_id}")
+@app.put("/update-soldier/{soldier_id}")
 async def update_soldier(
     soldier_id: int = Path(..., description="Numeric Soldier ID to update"),
-    update_values: dict = ...
+    update_values: dict = Body(..., embed=False)
 ):
     res = await dal.update_soldier(soldier_id, update_values)
     if res.get("matched", 0) == 0:
         raise HTTPException(status_code=404, detail="Soldier not found")
     return {"ok": True, **res}
 
-@app.delete("/delete soldier/{soldier_id}")
+@app.delete("/delete-soldier/{soldier_id}")
 async def delete_soldier(soldier_id: int):
     res = await dal.delete_soldier(soldier_id)
     if res.get("deleted", 0) == 0:
