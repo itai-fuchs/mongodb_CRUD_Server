@@ -1,4 +1,4 @@
-
+from soldier import Soldier
 from typing import List, Dict, Any
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import Config
@@ -8,6 +8,7 @@ from config import Config
 class MongoDal:
     def __init__(self): 
         self.conn: AsyncIOMotorClient | None = None
+        self.soldier = None
         self.conf = Config()
 # Open connection
     def open_conn(self) -> AsyncIOMotorClient:
@@ -28,9 +29,9 @@ class MongoDal:
     
     async def create_soldier(self,id:int, first_name: str, last_name: str, phone_number: int, rank: int) -> Dict[str, Any]:
         col = self.get_collection()
-        doc = {"id":id, "first_name": first_name, "last_name": last_name, "phone_number" : phone_number, "rank": rank}
-        await col.insert_one(doc)
-        return doc
+        self.soldier = Soldier(id, first_name, last_name, phone_number, rank).convert_to_json()
+        await col.insert_one(self.soldier)
+        return self.soldier
     
     async def update_soldier(self, id :int, update_values : dict):
         col = self.get_collection()
