@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException, Path
 from fastapi.responses import JSONResponse
 from typing import List, AsyncIterator
 from contextlib import asynccontextmanager
-
 from .mongo_dal import MongoDal
 
 dal = MongoDal()

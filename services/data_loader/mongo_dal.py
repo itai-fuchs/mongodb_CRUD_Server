@@ -1,8 +1,7 @@
-from Solider import Solider
 from typing import List, Dict, Any
 from motor.motor_asyncio import AsyncIOMotorClient
-from config import Config
-
+from .config import Config
+from .solider import Solider
 
 class MongoDal:
     def __init__(self):
